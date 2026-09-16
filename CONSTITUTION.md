@@ -37,7 +37,7 @@ incidental result of implementing an unrelated feature.
 ## 5. Every regeneration is recorded
 
 After generating or regenerating any module, add an entry to
-`regenerations/` recording which spec version and acceptance suite
+`lineage/` recording which spec version and acceptance suite
 version were used and what triggered the work. Undocumented regeneration is
 indistinguishable from undocumented drift.
 

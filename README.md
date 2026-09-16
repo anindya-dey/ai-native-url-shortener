@@ -12,7 +12,7 @@ exists yet — that gets generated from these files.
 | `specs/` | What must the system do? |
 | `contracts/` | What must not break silently for anything depending on this service? |
 | `features/`, `GUARANTEES.md` | How do we mechanically prove an implementation is correct? |
-| `decisions/`, `regenerations/` | Why does the system look the way it does, and what's been regenerated when? |
+| `decisions/`, `lineage/` | Why does the system look the way it does, and what's been regenerated when? |
 
 `MODULE_BOUNDARIES.md` describes how the implementation should be split into
 independently buildable, testable, and replaceable pieces.
@@ -31,6 +31,6 @@ independently buildable, testable, and replaceable pieces.
 
 ## Status
 
-No implementation exists yet. `regenerations/` has no entries. The first one
+No implementation exists yet. `lineage/` has no entries. The first one
 will be written the first time an agent generates an implementation from
 these specs.

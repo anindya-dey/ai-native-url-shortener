@@ -1,4 +1,4 @@
-# Regenerations
+# Lineage
 
 A record of every time an implementation was generated or regenerated from
 this repository's specs. Each event gets its own file, following

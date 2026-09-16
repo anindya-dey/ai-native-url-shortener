@@ -49,7 +49,7 @@ How to use these when implementing a feature:
    assumption about typical URL-shortener architecture — start from what's
    written here. Implementation code lives alongside these directories
    (e.g. in `src/` or wherever suits the chosen language), never inside
-   `specs/`, `contracts/`, `features/`, `decisions/`, or `regenerations/`,
+   `specs/`, `contracts/`, `features/`, `decisions/`, or `lineage/`,
    and never edits `GUARANTEES.md` — those directories and that file are
    implementation-agnostic and are never modified by generated code
    itself, only by the processes described in this file.
@@ -64,7 +64,7 @@ How to use these when implementing a feature:
    to explain why.
 5. Once the implementation passes every scenario in `features/` and every
    applicable guarantee in `GUARANTEES.md`, add a new entry to
-   `regenerations/` (see `regenerations/README.md` for the required fields
+   `lineage/` (see `lineage/README.md` for the required fields
    and naming convention), citing the actual commit or tag of
    `specs/`/`contracts/` used, and update `README.md`'s "Status" section to
    reflect that an implementation now exists — don't leave it claiming
@@ -83,8 +83,8 @@ How to use these when implementing a feature:
 5. Run every scenario in that module's `features/*.feature` file(s) and
    every applicable guarantee in `GUARANTEES.md`, not just the ones you
    expect to be affected.
-6. Add a new entry to `regenerations/`, following the naming convention and
-   fields in `regenerations/README.md`, citing the actual commit or tag of
+6. Add a new entry to `lineage/`, following the naming convention and
+   fields in `lineage/README.md`, citing the actual commit or tag of
    `specs/`/`contracts/` used. Include the trigger (which spec changed,
    which incident, which new requirement) — this is what makes the history
    useful later.
@@ -120,7 +120,7 @@ A module is done when:
 - Every scenario in the corresponding `features/*.feature` file passes.
 - Every applicable entry in `GUARANTEES.md` holds.
 - `contracts/` is unchanged, or was changed with a recorded decision.
-- `regenerations/` has a new entry for this work.
+- `lineage/` has a new entry for this work.
 
 "All tests passed" is not sufficient on its own — confirm the acceptance
 suite actually exercises what each spec requires, not just whatever the

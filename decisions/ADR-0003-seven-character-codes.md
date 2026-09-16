@@ -1,4 +1,4 @@
-# 0003 — Codes are seven characters from [A-Za-z0-9]
+# ADR-0003 — Codes are seven characters from [A-Za-z0-9]
 
 **Status:** Accepted
 

@@ -37,7 +37,7 @@ This system requires exactly one piece of external configuration:
 
 - **`BASE_URL`** — an absolute URL (`http` or `https`) with no trailing
   slash, used to construct `short_url` values as `{BASE_URL}/{code}`. See
-  `url-creation.md` and `../decisions/0005-short-url-is-computed-not-stored.md`.
+  `url-creation.md` and `../decisions/ADR-0005-short-url-is-computed-not-stored.md`.
   Required at startup; there is no default. How it's supplied (environment
   variable, config file, secrets manager) is an implementation choice, not
   a spec requirement — only the name `BASE_URL` and its constraints

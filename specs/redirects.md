@@ -15,7 +15,7 @@ is the public-facing redirect path, distinct from the API namespace.
   (`^[A-Za-z0-9]{7}$` — wrong length or invalid characters) returns the
   same `404` as a well-formed but nonexistent code. There is no separate
   malformed-input response for this parameter — see
-  `../decisions/0006-malformed-code-is-404.md`.
+  `../decisions/ADR-0006-malformed-code-is-404.md`.
 - A request for a code that exists but has expired is handled per
   `expiration.md` (not treated identically to "not found").
 - Each successful redirect increments `click_count` for that code by

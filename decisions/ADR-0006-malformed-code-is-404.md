@@ -1,4 +1,4 @@
-# 0006 — A malformed code returns 404, not 422
+# ADR-0006 — A malformed code returns 404, not 422
 
 **Status:** Accepted
 

@@ -1,4 +1,4 @@
-# 0005 — short_url is computed at read time, not stored
+# ADR-0005 — short_url is computed at read time, not stored
 
 **Status:** Accepted
 

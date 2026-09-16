@@ -18,7 +18,7 @@ affecting `click_count`.
   `{ "detail": "Short URL not found" }`.
 - A request whose path segment doesn't match the code shape
   (`^[A-Za-z0-9]{7}$`) returns the same `404` — see
-  `../decisions/0006-malformed-code-is-404.md`.
+  `../decisions/ADR-0006-malformed-code-is-404.md`.
 - Expired short URLs are still returned by this endpoint (the caller can
   see that a code exists and is expired); only the redirect endpoint
   changes behavior on expiration. See `expiration.md`.

@@ -1,4 +1,4 @@
-# 0004 — Expired short URLs return 410, not 404
+# ADR-0004 — Expired short URLs return 410, not 404
 
 **Status:** Accepted
 

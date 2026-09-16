@@ -25,7 +25,7 @@ and response schema. Request carries `original_url` (required) and
   a literal value and never derived from the incoming request. It is
   recomputed from `code` and the current `BASE_URL` on every response, so a
   future change to `BASE_URL` is reflected immediately for all existing
-  records without a data migration. See `../decisions/0005-short-url-is-computed-not-stored.md`.
+  records without a data migration. See `../decisions/ADR-0005-short-url-is-computed-not-stored.md`.
 - No deduplication is performed. Submitting the same `original_url` more
   than once creates a new, independent record and code each time; the
   service never looks up or returns a previously generated code for a

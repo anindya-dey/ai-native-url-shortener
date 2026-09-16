@@ -1,4 +1,4 @@
-# 0001 — Record architecture decisions
+# ADR-0001 — Record architecture decisions
 
 **Status:** Accepted
 
@@ -14,10 +14,10 @@ rule with no visible justification.
 
 Every consequential design choice — one that a reasonable alternative
 implementation might make differently — gets its own file under
-`decisions/`, numbered sequentially, following `TEMPLATE.md`. A decision is
-consequential if regenerating this system from specs alone, without the
-decision record, could plausibly produce a different (and equally
-spec-compliant) answer.
+`decisions/`, named `ADR-NNNN-short-title.md`, numbered sequentially,
+following `ADR-TEMPLATE.md`. A decision is consequential if regenerating
+this system from specs alone, without the decision record, could plausibly
+produce a different (and equally spec-compliant) answer.
 
 ## Alternatives considered
 

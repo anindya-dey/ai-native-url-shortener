@@ -1,4 +1,4 @@
-# 0002 — Redirect status is 302, not 301
+# ADR-0002 — Redirect status is 302, not 301
 
 **Status:** Accepted
 

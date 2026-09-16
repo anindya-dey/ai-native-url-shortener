@@ -91,7 +91,7 @@ Scenario: Submitting the same original_url twice creates two independent codes
   And the two responses have different codes
 ```
 
-See `../acceptance/features/url-creation.feature` for the version of these
+See `../features/url-creation.feature` for the version of these
 scenarios an agent should treat as the executable acceptance target, and
-`../acceptance/guarantees.md` for guarantees (e.g. code uniqueness) that
+`../GUARANTEES.md` for guarantees (e.g. code uniqueness) that
 apply beyond these specific examples.

@@ -7,11 +7,11 @@ exists yet — that gets generated from these files.
 
 ## What's here
 
-| Directory | Answers |
+| Directory/file | Answers |
 |---|---|
 | `specs/` | What must the system do? |
 | `contracts/` | What must not break silently for anything depending on this service? |
-| `acceptance/` | How do we mechanically prove an implementation is correct? |
+| `features/`, `GUARANTEES.md` | How do we mechanically prove an implementation is correct? |
 | `decisions/`, `regenerations/` | Why does the system look the way it does, and what's been regenerated when? |
 
 `MODULE_BOUNDARIES.md` describes how the implementation should be split into
@@ -24,8 +24,8 @@ independently buildable, testable, and replaceable pieces.
    from this repo.
 3. `specs/README.md` → each `specs/*.md` — what to build.
 4. `contracts/openapi.yaml` — the wire-level shape that must not drift.
-5. `acceptance/README.md` → `acceptance/features/*.feature` +
-   `acceptance/guarantees.md` — what "correct" means.
+5. `features/*.feature` + `GUARANTEES.md` — what "correct" means (see
+   `AGENTS.md`'s "Correctness artifacts" section for how to use these).
 6. `MODULE_BOUNDARIES.md` — how to decompose the work.
 7. `decisions/` — why past choices were made, before changing them.
 

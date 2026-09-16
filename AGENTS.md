@@ -4,31 +4,71 @@ This file tells any coding agent (human-directed or autonomous) how to work
 in this repository. Read `CONSTITUTION.md` first — these are the mechanics
 that implement those principles.
 
+## Correctness artifacts: `features/` and `GUARANTEES.md`
+
+Together these are the durable oracle for this system — what an agent uses
+to decide whether a regenerated implementation is correct, independent of
+how that implementation is built.
+
+- `features/*.feature` — Given-When-Then scenarios, one file per spec in
+  `specs/`. These are declarative. **They are not implemented yet** — there
+  are no step definitions and no test runner wired up in this repository.
+  When an agent generates the implementation, it also implements step
+  definitions (or an equivalent executable test) for these scenarios in
+  whatever language/framework the implementation uses. The `.feature`
+  files themselves do not change based on implementation choice.
+- `GUARANTEES.md` — statements that must hold regardless of implementation,
+  phrased so they could become property-based tests (e.g. via Hypothesis,
+  fast-check, or similar) in any language.
+
+What's deliberately not here: no implementation-specific test code (no
+pytest files, no step-definition Python/JS, no fixtures). Those are
+generated alongside the implementation, not committed to this spec-only
+repository. Once an implementation exists, that generated test code is
+disposable and can be regenerated at will, while `features/*.feature` and
+`GUARANTEES.md` stay fixed as the target it has to keep satisfying.
+
+How to use these when implementing a feature:
+
+1. Before implementing it, read its `.feature` file and any relevant
+   entries in `GUARANTEES.md`.
+2. Implement step definitions/executable tests for every scenario.
+3. Implement property-based tests for every applicable entry in
+   `GUARANTEES.md`.
+4. Treat a module as regeneration-safe only once all of the above pass
+   against the new implementation — not the old one.
+5. If a scenario can't be satisfied as written, do not silently change the
+   `.feature` file to match the implementation. Go back to the
+   corresponding `specs/*.md` file, resolve the discrepancy there, then
+   update both the spec and the scenario together.
+
 ## Generating the implementation for the first time
 
-1. Read every file in `specs/`, `contracts/`, and `acceptance/` before
-   writing any code. Do not start from an assumption about typical
-   URL-shortener architecture — start from what's written here.
-   Implementation code lives alongside these directories (e.g. in `src/`
-   or wherever suits the chosen language), never inside `specs/`,
-   `contracts/`, `acceptance/`, `decisions/`, or `regenerations/` — those
-   five directories are implementation-agnostic and are never modified by
-   generated code itself, only by the processes described in this file.
+1. Read every file in `specs/`, `contracts/`, `features/`, and
+   `GUARANTEES.md` before writing any code. Do not start from an
+   assumption about typical URL-shortener architecture — start from what's
+   written here. Implementation code lives alongside these directories
+   (e.g. in `src/` or wherever suits the chosen language), never inside
+   `specs/`, `contracts/`, `features/`, `decisions/`, or `regenerations/`,
+   and never edits `GUARANTEES.md` — those directories and that file are
+   implementation-agnostic and are never modified by generated code
+   itself, only by the processes described in this file.
 2. Treat `contracts/openapi.yaml` as fixed. The implementation must conform
    to it; it does not get to redefine it mid-generation.
 3. For each `specs/<feature>.md`, implement the behavior described, then
-   confirm every scenario in `acceptance/features/<feature>.feature` and
-   every applicable guarantee in `acceptance/guarantees.md` passes.
+   confirm every scenario in `features/<feature>.feature` and every
+   applicable guarantee in `GUARANTEES.md` passes.
 4. Split the implementation to match `MODULE_BOUNDARIES.md`. Do not merge
    modules that are listed there as independently buildable, and do not
    split a module finer than what's listed without updating that file
    to explain why.
-5. Once the implementation passes every scenario and guarantee in
-   `acceptance/`, add a new entry to `regenerations/` (see
-   `regenerations/README.md` for the required fields and naming convention),
-   citing the actual commit or tag of `specs/`/`contracts/` used, and
-   update `README.md`'s "Status" section to reflect that an implementation
-   now exists — don't leave it claiming otherwise.
+5. Once the implementation passes every scenario in `features/` and every
+   applicable guarantee in `GUARANTEES.md`, add a new entry to
+   `regenerations/` (see `regenerations/README.md` for the required fields
+   and naming convention), citing the actual commit or tag of
+   `specs/`/`contracts/` used, and update `README.md`'s "Status" section to
+   reflect that an implementation now exists — don't leave it claiming
+   otherwise.
 
 ## Regenerating an existing module
 
@@ -40,8 +80,9 @@ that implement those principles.
    and fix the module boundary or the acceptance gap first (see
    `CONSTITUTION.md` §6-7).
 4. Regenerate from the current specs and contracts.
-5. Run the full acceptance suite for that module, not just the scenarios
-   you expect to be affected.
+5. Run every scenario in that module's `features/*.feature` file(s) and
+   every applicable guarantee in `GUARANTEES.md`, not just the ones you
+   expect to be affected.
 6. Add a new entry to `regenerations/`, following the naming convention and
    fields in `regenerations/README.md`, citing the actual commit or tag of
    `specs/`/`contracts/` used. Include the trigger (which spec changed,
@@ -57,7 +98,7 @@ handle:
    decision someone will need eventually.
 2. Propose the resolution back into `specs/<feature>.md` as an explicit rule
    or an explicit Given-When-Then scenario, and add the corresponding
-   scenario to `acceptance/features/`.
+   scenario to `features/`.
 3. Only then implement it. The spec update and the implementation should
    land together, not implementation first with the spec catching up later.
 
@@ -76,9 +117,8 @@ If implementing a spec seems to require changing `contracts/openapi.yaml`:
 A module is done when:
 
 - Its behavior matches `specs/`.
-- Every scenario in the corresponding `acceptance/features/*.feature` file
-  passes.
-- Every applicable entry in `acceptance/guarantees.md` holds.
+- Every scenario in the corresponding `features/*.feature` file passes.
+- Every applicable entry in `GUARANTEES.md` holds.
 - `contracts/` is unchanged, or was changed with a recorded decision.
 - `regenerations/` has a new entry for this work.
 

@@ -24,14 +24,14 @@ only): `0001-url-creation-initial-generation.md`,
   concerns, or `system` for a full regeneration
 - **Spec version** — which spec file(s) governed this, and the actual
   commit or tag of them
-- **Acceptance version** — which state of `../acceptance/features/`
-  and `../acceptance/guarantees.md` was used to check the result
+- **Acceptance version** — which state of `../features/`
+  and `../GUARANTEES.md` was used to check the result
 - **Trigger** — what caused this: initial generation, a changed spec, an
   incident, a dependency update
 - **Agent/author** — who or what performed the regeneration
 - **Result** — did every applicable scenario and guarantee pass; any gaps
   discovered, and whether they were closed by updating a spec, a contract,
-  or `acceptance/`
+  a feature file, or `GUARANTEES.md`
 
 Language, framework, and storage engine choices may be noted in **Result**
 for context (they're useful history), but are never binding on future

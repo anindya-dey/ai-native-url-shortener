@@ -31,7 +31,7 @@ handled by retry-on-conflict per `../specs/url-creation.md`.
 
 ## Consequences
 
-Fixes the collision math referenced in `../acceptance/guarantees.md`
+Fixes the collision math referenced in `../GUARANTEES.md`
 ("uniqueness while active"). If code length ever needs to change, this
 decision and every one of the following hardcoded occurrences of `7`
 need to change together: `../specs/overview.md` (glossary),

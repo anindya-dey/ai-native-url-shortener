@@ -50,4 +50,4 @@ Scenario: Malformed code returns 404, not 422
   Then the response status is 404
 ```
 
-See `../acceptance/features/metadata.feature` for the executable form.
+See `../features/metadata.feature` for the executable form.

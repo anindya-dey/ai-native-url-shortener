@@ -5,8 +5,8 @@ They are written before implementation and remain the source of truth after
 implementation exists. If code and spec disagree, the spec wins.
 
 Acceptance criteria in each spec are written as Given-When-Then scenarios so
-they map directly onto the scenarios in `../acceptance/features/`. A spec
-change and its corresponding acceptance change should land together.
+they map directly onto the scenarios in `../features/`. A spec change and
+its corresponding scenario/guarantee change should land together.
 
 - [Overview](overview.md) — scope, glossary, shared shape
 - [Shared conventions](shared-conventions.md) — errors, time, naming

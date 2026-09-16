@@ -30,7 +30,7 @@ record — only `code` is persisted, and `short_url` is reconstructed from
   was the other option surfaced during review. It's more flexible for
   multi-domain deployments, but introduces a real security consideration
   (Host header can be spoofed unless validated against an allowlist) and
-  makes the guarantee in `../acceptance/guarantees.md` ("short_url
+  makes the guarantee in `../GUARANTEES.md` ("short_url
   construction") harder to test deterministically, since the expected
   value would depend on how a test client sets its Host header rather than
   on a single configured constant.
@@ -42,5 +42,5 @@ that every module constructing a `ShortUrl` response reads from — this
 does not change `../MODULE_BOUNDARIES.md`'s ownership model, since `BASE_URL`
 is global configuration, not data any module writes. If multi-domain
 support is ever required, this decision should be revisited alongside the
-Host-header alternative rejected above, and `../acceptance/guarantees.md`'s
+Host-header alternative rejected above, and `../GUARANTEES.md`'s
 "short_url construction" properties will need updating to match.

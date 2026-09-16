@@ -55,4 +55,4 @@ Scenario: A short URL with no expires_at never expires
   Then the response status is 302
 ```
 
-See `../acceptance/features/expiration.feature` for the executable form.
+See `../features/expiration.feature` for the executable form.

@@ -19,7 +19,7 @@ unconditionally — never `301`.
   permitted to cache a `301` indefinitely and skip contacting the server on
   subsequent visits. That would make `click_count` undercount real usage
   after the first visit from a given client — directly violating the
-  click-tracking guarantees in `../acceptance/guarantees.md`. It would also
+  click-tracking guarantees in `../GUARANTEES.md`. It would also
   make it impossible to ever repoint a code to a different destination
   without stale caches serving the old one.
 - **307 Temporary Redirect.** Considered equivalent for caching purposes to

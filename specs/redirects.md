@@ -23,7 +23,7 @@ is the public-facing redirect path, distinct from the API namespace.
   does not change `click_count`.
 - `click_count` increments are atomic — concurrent redirect requests for
   the same code must not lose increments (see
-  `../acceptance/guarantees.md`).
+  `../GUARANTEES.md`).
 
 ## Acceptance criteria
 
@@ -57,5 +57,5 @@ Scenario: Concurrent redirects do not lose click count
 ```
 
 See `expiration.md` for the expired-code case and
-`../acceptance/features/redirects.feature` for the executable form of
+`../features/redirects.feature` for the executable form of
 these scenarios.

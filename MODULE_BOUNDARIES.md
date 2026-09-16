@@ -40,7 +40,7 @@ Before accepting a module boundary, confirm:
 - **Contract**: `GET /{code}` in `contracts/openapi.yaml`
 - **Exclusive write authority over**: `click_count`. No other module
   writes this field — this is what makes the concurrency guarantees in
-  `acceptance/guarantees.md` checkable against one module instead of
+  `GUARANTEES.md` checkable against one module instead of
   the whole system.
 - **Notes**: the concurrency guarantee (exactly-once increment under
   concurrent requests) is the part most likely to make this module feel

@@ -24,9 +24,9 @@ patch necessary.
 ## 3. Nothing ships without acceptance criteria that survive the implementation
 
 Every behavior described in `specs/` must have a corresponding scenario in
-`acceptance/features/` or a guarantee in `acceptance/guarantees.md`. If a
-requirement can't be checked mechanically and independently of the current
-code, it isn't done — it's a claim.
+`features/` or a guarantee in `GUARANTEES.md`. If a requirement can't be
+checked mechanically and independently of the current code, it isn't done
+— it's a claim.
 
 ## 4. Contracts change deliberately, never as a side effect
 
@@ -52,7 +52,7 @@ is written.
 ## 7. The deletion test is a real, periodic exercise
 
 Periodically — and always before declaring a module "done" — ask: if the
-implementation were deleted right now, would `specs/` + `acceptance/` +
-`contracts/` be sufficient to regenerate it with confidence? If the honest
-answer relies on the current code, that gap gets written down and closed
-before moving on.
+implementation were deleted right now, would `specs/` + `features/` +
+`GUARANTEES.md` + `contracts/` be sufficient to regenerate it with
+confidence? If the honest answer relies on the current code, that gap gets
+written down and closed before moving on.

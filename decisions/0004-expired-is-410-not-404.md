@@ -20,7 +20,7 @@ A redirect request for a code that exists but has expired returns
   "this existed and is gone on purpose" — a meaningfully different signal
   for any client or monitoring system trying to distinguish "bad link"
   from "expected expiration." Collapsing them would also make it
-  impossible to write the `../acceptance/features/expiration.feature`
+  impossible to write the `../features/expiration.feature`
   scenarios as distinct, checkable cases.
 
 ## Consequences

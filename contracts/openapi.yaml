@@ -1,0 +1,167 @@
+openapi: 3.0.3
+info:
+  title: URL Shortener
+  version: 1.0.0
+  description: >
+    Context boundary for the URL shortener. This file is authoritative for
+    wire shape. Changing it is a deliberate, recorded action — see
+    ../CONSTITUTION.md §4 and ../decisions/.
+
+servers:
+  - url: /
+
+paths:
+  /api/v1/urls:
+    post:
+      operationId: createShortUrl
+      summary: Create a short URL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUrlRequest'
+      responses:
+        '201':
+          description: Short URL created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShortUrl'
+        '422':
+          description: Validation failure (unsupported scheme, malformed URL, or past expires_at)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+
+  /api/v1/urls/{code}:
+    get:
+      operationId: getShortUrlMetadata
+      summary: Retrieve metadata for a short URL without redirecting
+      parameters:
+        - $ref: '#/components/parameters/Code'
+      responses:
+        '200':
+          description: Metadata for the code, whether active or expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShortUrl'
+        '404':
+          description: No short URL exists for this code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+
+  /{code}:
+    get:
+      operationId: redirectShortUrl
+      summary: Redirect to the original URL and increment click_count
+      parameters:
+        - $ref: '#/components/parameters/Code'
+      responses:
+        '302':
+          description: Redirect to original_url; click_count incremented by 1
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+        '404':
+          description: No short URL exists for this code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '410':
+          description: Short URL exists but has expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredError'
+
+components:
+  parameters:
+    Code:
+      name: code
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-Za-z0-9]{7}$'
+
+  schemas:
+    CreateUrlRequest:
+      type: object
+      required:
+        - original_url
+      properties:
+        original_url:
+          type: string
+          format: uri
+          pattern: '^https?://'
+          maxLength: 2048
+          description: Must be http or https scheme. Maximum 2048 characters.
+        expires_at:
+          type: string
+          format: date-time
+          description: >
+            Optional. Must be strictly in the future at request time.
+            Naive (no timezone) values are interpreted as UTC.
+      additionalProperties: false
+
+    ShortUrl:
+      type: object
+      required:
+        - code
+        - original_url
+        - short_url
+        - click_count
+        - created_at
+      properties:
+        code:
+          type: string
+          pattern: '^[A-Za-z0-9]{7}$'
+        original_url:
+          type: string
+          format: uri
+          pattern: '^https?://'
+          maxLength: 2048
+        short_url:
+          type: string
+          format: uri
+        click_count:
+          type: integer
+          minimum: 0
+        created_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+
+    ValidationError:
+      type: object
+      required: [detail]
+      properties:
+        detail:
+          type: string
+
+    NotFoundError:
+      type: object
+      required: [detail]
+      properties:
+        detail:
+          type: string
+          enum: ["Short URL not found"]
+
+    ExpiredError:
+      type: object
+      required: [detail]
+      properties:
+        detail:
+          type: string
+          enum: ["Short URL has expired"]

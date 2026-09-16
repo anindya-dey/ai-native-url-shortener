@@ -1,0 +1,9 @@
+# OS/editor cruft — safe to ignore regardless of implementation language.
+# The agent generating/regenerating an implementation should extend this
+# file with language- and tool-specific entries (e.g. __pycache__/,
+# node_modules/, .venv/) rather than replacing it.
+.DS_Store
+Thumbs.db
+*.swp
+.env
+.env.local

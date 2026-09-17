@@ -7,3 +7,10 @@ Thumbs.db
 *.swp
 .env
 .env.local
+
+# Python implementation/test artifacts.
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.hypothesis/
+.venv/

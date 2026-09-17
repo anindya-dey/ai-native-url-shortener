@@ -3,7 +3,7 @@ Feature: Metadata
   I want to inspect a short URL's data without triggering a redirect
   So that I can build tools around short URLs without affecting click counts
 
-  # Source of truth for these rules: ../../specs/metadata.md
+  # Source of truth for these rules: ../specs/metadata.md
 
   Scenario: Metadata for an active short URL
     Given an existing, unexpired short URL with code "abc1234"

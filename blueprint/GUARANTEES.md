@@ -51,9 +51,13 @@ example. These complement, not replace, the scenarios in `features/`.
 ## Round-trip integrity
 
 - **Original URL is preserved exactly**: for any short URL created with a
-  given `original_url`, every subsequent metadata read or redirect
-  `Location` header reproduces that exact string — no normalization,
-  trailing-slash addition/removal, or percent-encoding changes.
+  given `original_url`, every subsequent metadata read reproduces that
+  exact string — no normalization, trailing-slash addition/removal, or
+  percent-encoding changes. The redirect `Location` header reproduces
+  `original_url` as its RFC 3986 percent-encoding-equivalent
+  representation (dereferencing to the identical resource), not
+  necessarily as an identical byte sequence — see
+  `decisions/ADR-0007-location-header-preserves-percent-encoding.md`.
 - **Timestamps round-trip in UTC**: for any `expires_at` submitted at
   creation (naive or UTC), the value returned in every later read
   represents the same instant, expressed in UTC.

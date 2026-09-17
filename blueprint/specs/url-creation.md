@@ -9,6 +9,11 @@ and response schema. Request carries `original_url` (required) and
 ## Business rules
 
 - Only `http` and `https` schemes are accepted for `original_url`.
+- `original_url` must include a non-empty host. A scheme with no host (e.g.
+  `https://` alone) is rejected.
+- `original_url` must not contain control characters (`\r`, `\n`, or other
+  C0/C1 control characters) anywhere in the string. Such values are
+  rejected.
 - `original_url` is at most 2048 characters. Longer values are rejected.
 - `expires_at` is optional. When present, it must be strictly in the future
   relative to the time the request is processed.
@@ -62,6 +67,16 @@ Scenario: Malformed URL is rejected
 
 Scenario: Oversized original_url is rejected
   Given a request with original_url longer than 2048 characters
+  When the client POSTs to /api/v1/urls
+  Then the response status is 422
+
+Scenario: Scheme-only URL with no host is rejected
+  Given a request with original_url "https://"
+  When the client POSTs to /api/v1/urls
+  Then the response status is 422
+
+Scenario: original_url containing control characters is rejected
+  Given a request with original_url containing a carriage return or line feed character
   When the client POSTs to /api/v1/urls
   Then the response status is 422
 

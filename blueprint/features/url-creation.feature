@@ -3,7 +3,7 @@ Feature: URL creation
   I want to submit a destination URL
   So that I receive a short, redirectable code
 
-  # Source of truth for these rules: ../../specs/url-creation.md
+  # Source of truth for these rules: ../specs/url-creation.md
 
   Scenario: Valid destination creates a short URL
     Given no prior state
@@ -33,6 +33,16 @@ Feature: URL creation
   Scenario: Oversized original_url is rejected
     Given no prior state
     When the client POSTs to /api/v1/urls with an original_url of 2049 characters
+    Then the response status is 422
+
+  Scenario: Scheme-only URL with no host is rejected
+    Given no prior state
+    When the client POSTs to /api/v1/urls with original_url "https://"
+    Then the response status is 422
+
+  Scenario: original_url containing control characters is rejected
+    Given no prior state
+    When the client POSTs to /api/v1/urls with original_url containing a carriage return or line feed character
     Then the response status is 422
 
   Scenario: Missing original_url is rejected

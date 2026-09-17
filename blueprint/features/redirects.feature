@@ -3,7 +3,7 @@ Feature: Redirects
   I want to be redirected to the original destination
   So that the short URL behaves like the original link
 
-  # Source of truth for these rules: ../../specs/redirects.md
+  # Source of truth for these rules: ../specs/redirects.md
   # Expiration-specific scenarios live in expiration.feature.
 
   Scenario: Redirect to an active short URL

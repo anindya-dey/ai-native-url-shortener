@@ -3,7 +3,7 @@ Feature: Expiration
   I need expired short URLs to stop redirecting while remaining inspectable
   So that expiration is enforced consistently across endpoints
 
-  # Source of truth for these rules: ../../specs/expiration.md
+  # Source of truth for these rules: ../specs/expiration.md
 
   Scenario: Redirect to an expired short URL returns 410
     Given an existing short URL with code "abc1234" that expired 1 hour ago

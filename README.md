@@ -62,7 +62,12 @@ testing one implementation depends on any other.
 ## Verifying implementations behave identically
 
 Because `blueprint/contracts/openapi.yaml` and `blueprint/GUARANTEES.md`
-don't reference any implementation, the same black-box test suite can run
-against any of them over HTTP without modification. See
-`contract-tests/README.md` once it exists for how to point that suite at
-whichever language's server is currently running.
+don't reference any implementation, [`contract-tests/`](contract-tests/)
+is a single black-box HTTP test suite — no imports from any language
+directory — that runs unmodified against any of them. Point it at a
+running server (`TARGET_URL=http://127.0.0.1:PORT uv run pytest -q` from
+`contract-tests/`), or run `./contract-tests/run-all.sh` to start all
+three implementations in turn, run the identical suite against each, and
+print a pass/fail summary — the most direct demonstration in this repo
+that `blueprint/` is what's actually load-bearing, not the language that
+happens to render it this week.

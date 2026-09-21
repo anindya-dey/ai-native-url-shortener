@@ -34,7 +34,8 @@ default; the service fails fast at startup without it. This is deliberate
 BASE_URL=https://short.example cargo run
 ```
 
-Listens on `0.0.0.0:8080`.
+Listens on `0.0.0.0:8080` by default. Set `PORT` to override (e.g.
+`PORT=8081 BASE_URL=https://short.example cargo run`).
 
 **Run the tests**:
 

@@ -1,0 +1,13 @@
+[project]
+name = "contract-tests"
+version = "0.1.0"
+description = "Black-box HTTP suite proving every language implementation in this repo satisfies the same blueprint/contracts, blueprint/features, and blueprint/GUARANTEES.md — unmodified across all of them."
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.27",
+    "pytest>=8.0",
+    "hypothesis>=6.100",
+]
+
+[tool.uv]
+package = false

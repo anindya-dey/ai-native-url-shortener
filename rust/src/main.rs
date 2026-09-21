@@ -12,7 +12,11 @@ async fn main() {
 
     let app = build_app(base_url, Arc::new(Store::new()));
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await.unwrap();
+    let port: u16 = std::env::var("PORT")
+        .ok()
+        .and_then(|p| p.parse().ok())
+        .unwrap_or(8080);
+    let listener = tokio::net::TcpListener::bind(("0.0.0.0", port)).await.unwrap();
     println!("listening on {}", listener.local_addr().unwrap());
     axum::serve(listener, app).await.unwrap();
 }

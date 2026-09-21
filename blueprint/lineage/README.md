@@ -54,6 +54,7 @@ the same implementation choices as the last one. Per `../CONSTITUTION.md`
 ## Current state
 
 `python/` has one lineage entry (`0001`, full initial generation).
-`typescript/` and `rust/` do not exist yet. Add a new numbered file here
-the first time an agent generates an implementation in a new language
-directory, or regenerates a module in an existing one.
+`typescript/` has one lineage entry (`0002`, full initial generation).
+`rust/` does not exist yet. Add a new numbered file here the first time an
+agent generates an implementation in a new language directory, or
+regenerates a module in an existing one.

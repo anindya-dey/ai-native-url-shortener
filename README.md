@@ -34,7 +34,7 @@ the same boundaries apply regardless of language.
 | Language | Framework | Status | Lineage |
 |---|---|---|---|
 | [`python/`](python/) | FastAPI | All modules implemented; all scenarios and guarantees pass | `blueprint/lineage/0001-system-initial-generation.md` |
-| [`typescript/`](typescript/) | Fastify | Not yet generated | — |
+| [`typescript/`](typescript/) | Fastify | All modules implemented; all scenarios and guarantees pass | `blueprint/lineage/0002-typescript-system-initial-generation.md` |
 | [`rust/`](rust/) | Axum | Not yet generated | — |
 
 Each language directory has its own README with setup and run

@@ -1,0 +1,25 @@
+{
+  "name": "url-shortener-typescript",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "TypeScript implementation of the url-shortener-phoenix blueprint",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "fastify": "^5.0.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "fast-check": "^4.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^5.0.0"
+  }
+}

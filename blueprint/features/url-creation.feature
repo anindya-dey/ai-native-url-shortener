@@ -35,6 +35,13 @@ Feature: URL creation
     When the client POSTs to /api/v1/urls with an original_url of 2049 characters
     Then the response status is 422
 
+  Scenario: Length limit counts Unicode code points, not UTF-16 code units
+    Given no prior state
+    When the client POSTs to /api/v1/urls with an original_url of exactly 2048 Unicode code points, using a character that requires a UTF-16 surrogate pair
+    Then the response status is 201
+    When the client POSTs to /api/v1/urls with that same original_url plus one more code point (2049 code points)
+    Then the response status is 422
+
   Scenario: Scheme-only URL with no host is rejected
     Given no prior state
     When the client POSTs to /api/v1/urls with original_url "https://"

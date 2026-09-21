@@ -15,6 +15,12 @@ and response schema. Request carries `original_url` (required) and
   C0/C1 control characters) anywhere in the string. Such values are
   rejected.
 - `original_url` is at most 2048 characters. Longer values are rejected.
+  "Characters" means Unicode code points, not UTF-16 code units — a
+  character requiring a surrogate pair (e.g. many emoji) counts as one,
+  not two. This is explicit because it is implementation-visible:
+  JavaScript's native string length counts UTF-16 code units, which would
+  silently double-count such characters relative to this rule unless an
+  implementation counts code points instead (e.g. by iterating the string).
 - `expires_at` is optional. When present, it must be strictly in the future
   relative to the time the request is processed.
 - The service generates a seven-character code from a fixed charset
@@ -67,6 +73,15 @@ Scenario: Malformed URL is rejected
 
 Scenario: Oversized original_url is rejected
   Given a request with original_url longer than 2048 characters
+  When the client POSTs to /api/v1/urls
+  Then the response status is 422
+
+Scenario: Length limit counts Unicode code points, not UTF-16 code units
+  Given a request with original_url exactly 2048 Unicode code points long,
+    built using a character that requires a surrogate pair in UTF-16
+  When the client POSTs to /api/v1/urls
+  Then the response status is 201
+  Given the same original_url with one more code point appended (2049 code points)
   When the client POSTs to /api/v1/urls
   Then the response status is 422
 

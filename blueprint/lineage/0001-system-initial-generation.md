@@ -1,6 +1,8 @@
 # 0001 — system: initial generation
 
 - **Date**: 2026-09-17
+- **Language**: `python` (backfilled — this entry predates the
+  multi-language convention; see `lineage/README.md`).
 - **Module**: `system` — full initial generation covering all three modules
   (URL creation, Redirect, Metadata) plus the cross-cutting expiration rule.
 - **Spec version**: working tree at time of generation, pre-first-commit for

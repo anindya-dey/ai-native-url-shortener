@@ -14,3 +14,11 @@ __pycache__/
 .pytest_cache/
 .hypothesis/
 .venv/
+
+# TypeScript implementation/test artifacts.
+node_modules/
+dist/
+coverage/
+
+# Rust implementation/test artifacts.
+target/

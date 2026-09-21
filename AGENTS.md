@@ -46,16 +46,23 @@ How to use these when implementing a feature:
 
 ## Generating the implementation for the first time
 
-1. Read every file in `blueprint/specs/`, `blueprint/contracts/`,
+1. Pick or confirm the target language directory at the repository root —
+   `python/`, `typescript/`, `rust/`, or a new one you're adding. Read
+   every file in `blueprint/specs/`, `blueprint/contracts/`,
    `blueprint/features/`, and `blueprint/GUARANTEES.md` before writing any
    code. Do not start from an assumption about typical URL-shortener
-   architecture — start from what's written here. Implementation code
-   lives at the repository root (`src/`, `tests/`, `pyproject.toml`,
-   `uv.lock`), never inside `blueprint/`. `blueprint/` holds `specs/`,
+   architecture, and do not look at another language directory's
+   implementation for design decisions — start from what's written in
+   `blueprint/`. Implementation code lives entirely inside that one
+   language directory (e.g. `python/src/`, `python/tests/`,
+   `python/pyproject.toml`), never inside `blueprint/` and never spread
+   across multiple language directories. `blueprint/` holds `specs/`,
    `contracts/`, `features/`, `decisions/`, `lineage/`, `GUARANTEES.md`,
    `MODULE_BOUNDARIES.md`, and `CONSTITUTION.md` — implementation-agnostic
    and never modified by generated code itself, only by the processes
-   described in this file.
+   described in this file. Multiple language directories may exist side by
+   side; regenerating one never requires touching another (see
+   `blueprint/CONSTITUTION.md` §8).
 2. Treat `blueprint/contracts/openapi.yaml` as fixed. The implementation
    must conform to it; it does not get to redefine it mid-generation.
 3. For each `blueprint/specs/<feature>.md`, implement the behavior
@@ -77,13 +84,17 @@ How to use these when implementing a feature:
 ## Regenerating an existing module
 
 1. Confirm which spec(s) govern the module from
-   `blueprint/MODULE_BOUNDARIES.md`.
+   `blueprint/MODULE_BOUNDARIES.md`, and which language directory you're
+   regenerating (`python/`, `typescript/`, `rust/`, ...). Regenerating a
+   module in one language directory never requires touching the same
+   module in another — each language directory is independently
+   regeneration-safe.
 2. Re-read the current version of those specs — they may have changed since
    the implementation was last generated.
-3. Delete the existing implementation for that module. Do not incrementally
-   edit it. If deleting it causes dread rather than mild inconvenience, stop
-   and fix the module boundary or the acceptance gap first (see
-   `blueprint/CONSTITUTION.md` §6-7).
+3. Delete the existing implementation for that module, in that language
+   directory only. Do not incrementally edit it. If deleting it causes
+   dread rather than mild inconvenience, stop and fix the module boundary
+   or the acceptance gap first (see `blueprint/CONSTITUTION.md` §6-7).
 4. Regenerate from the current specs and contracts.
 5. Run every scenario in that module's `blueprint/features/*.feature`
    file(s) and every applicable guarantee in `blueprint/GUARANTEES.md`, not
@@ -91,8 +102,8 @@ How to use these when implementing a feature:
 6. Add a new entry to `blueprint/lineage/`, following the naming convention
    and fields in `blueprint/lineage/README.md`, citing the actual commit or
    tag of `blueprint/specs/`/`blueprint/contracts/` used. Include the
-   trigger (which spec changed, which incident, which new requirement) —
-   this is what makes the history useful later.
+   language directory and the trigger (which spec changed, which incident,
+   which new requirement) — this is what makes the history useful later.
 
 ## Handling gaps and ambiguity
 

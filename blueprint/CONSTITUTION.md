@@ -56,3 +56,16 @@ implementation were deleted right now, would `specs/` + `features/` +
 `GUARANTEES.md` + `contracts/` be sufficient to regenerate it with
 confidence? If the honest answer relies on the current code, that gap gets
 written down and closed before moving on.
+
+## 8. The spec is language-independent; implementations may coexist
+
+Nothing in this repository binds a spec, feature, or guarantee to a
+specific language, framework, or runtime. Multiple implementations of the
+same specs may exist side by side, each in its own top-level directory
+(e.g. `python/`, `typescript/`, `rust/`), and none is privileged over the
+others except by whichever is currently deployed. Regenerating or
+rewriting one implementation never requires touching another. A behavior
+gap or ambiguity discovered while building any one of them is closed in
+`specs/`/`features/`/`GUARANTEES.md` — the shared, language-agnostic
+layer — not patched into only the implementation that happened to surface
+it, so every other implementation benefits from the fix too.

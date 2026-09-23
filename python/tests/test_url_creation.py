@@ -58,6 +58,11 @@ def test_scheme_only_url_with_no_host_is_rejected(client):
     assert resp.status_code == 422
 
 
+def test_url_with_userinfo_but_no_host_is_rejected(client):
+    resp = create(client, "https://user@/path")
+    assert resp.status_code == 422
+
+
 def test_userinfo_only_url_with_no_host_is_rejected(client):
     """Regression coverage for the security-audit fix in
     src/url_shortener/models.py: host-emptiness is checked via

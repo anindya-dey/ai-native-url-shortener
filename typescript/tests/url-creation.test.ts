@@ -47,6 +47,12 @@ describe('Feature: URL creation', () => {
     expect(res.statusCode).toBe(422);
   });
 
+  it('URL with userinfo but no host is rejected', async () => {
+    const { app } = makeApp();
+    const res = await createUrl(app, { original_url: 'https://user@/path' });
+    expect(res.statusCode).toBe(422);
+  });
+
   it('original_url containing control characters is rejected', async () => {
     const { app } = makeApp();
     const res = await createUrl(app, { original_url: 'https://example.com/\r\nSet-Cookie: x=1' });

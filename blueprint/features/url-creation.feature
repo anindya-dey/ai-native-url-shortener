@@ -47,6 +47,11 @@ Feature: URL creation
     When the client POSTs to /api/v1/urls with original_url "https://"
     Then the response status is 422
 
+  Scenario: URL with userinfo but no host is rejected
+    Given no prior state
+    When the client POSTs to /api/v1/urls with original_url "https://user@/path"
+    Then the response status is 422
+
   Scenario: original_url containing control characters is rejected
     Given no prior state
     When the client POSTs to /api/v1/urls with original_url containing a carriage return or line feed character

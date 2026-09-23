@@ -75,6 +75,11 @@ def test_scheme_only_url_with_no_host_is_rejected(client):
     assert response.status_code == 422
 
 
+def test_url_with_userinfo_but_no_host_is_rejected(client):
+    response = create(client, original_url="https://user@/path")
+    assert response.status_code == 422
+
+
 def test_original_url_containing_control_characters_is_rejected(client):
     response = create(client, original_url="https://example.com/a\r\nb")
     assert response.status_code == 422

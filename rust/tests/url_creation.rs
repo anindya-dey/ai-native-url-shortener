@@ -87,6 +87,13 @@ async fn scheme_only_url_with_no_host_is_rejected() {
 }
 
 #[tokio::test]
+async fn url_with_userinfo_but_no_host_is_rejected() {
+    let app = TestApp::new();
+    let response = app.post_urls(json!({ "original_url": "https://user@/path" })).await;
+    assert_eq!(response.status, 422);
+}
+
+#[tokio::test]
 async fn original_url_containing_control_characters_is_rejected() {
     let app = TestApp::new();
     let response = app.post_urls(json!({ "original_url": "https://example.com/a\r\nb" })).await;

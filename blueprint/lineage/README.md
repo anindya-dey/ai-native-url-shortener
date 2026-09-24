@@ -53,8 +53,6 @@ the same implementation choices as the last one. Per `../CONSTITUTION.md`
 
 ## Current state
 
-`python/` has one lineage entry (`0001`, full initial generation).
-`typescript/` has one lineage entry (`0002`, full initial generation).
-`rust/` does not exist yet. Add a new numbered file here the first time an
-agent generates an implementation in a new language directory, or
-regenerates a module in an existing one.
+`python/`, `typescript/`, and `rust/` each have an implementation with two
+lineage entries: Python has `0001` and `0004`, TypeScript has `0002` and
+`0005`, and Rust has `0003` and `0006`.

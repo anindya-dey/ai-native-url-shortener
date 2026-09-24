@@ -11,6 +11,8 @@ and response schema. Request carries `original_url` (required) and
 - Only `http` and `https` schemes are accepted for `original_url`.
 - `original_url` must include a non-empty host. A scheme with no host (e.g.
   `https://` alone) is rejected.
+- A URL with userinfo but an empty host (e.g. `https://user@/path` or
+  `https://user:pass@/path`) is rejected as lacking a non-empty host.
 - `original_url` must not contain control characters (`\r`, `\n`, or other
   C0/C1 control characters) anywhere in the string. Such values are
   rejected.
